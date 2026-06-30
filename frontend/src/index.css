@@ -38,7 +38,7 @@ body {
 
 /* Gradient text */
 .gradient-text {
-  @apply bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-purple-400 to-violet-400 bg-clip-text text-transparent;
 }
 
 /* Smooth transitions */
@@ -57,12 +57,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(76, 175, 80, 0.4);
+  background: rgba(139, 92, 246, 0.4);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(76, 175, 80, 0.6);
+  background: rgba(139, 92, 246, 0.6);
 }
 
 /* Animation */
@@ -96,30 +96,30 @@ body {
 
 /* Buttons */
 .btn-primary {
-  @apply px-6 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold rounded-xl transition-smooth hover:shadow-lg hover:shadow-emerald-500/50 active:scale-95;
+  @apply px-6 py-3 bg-gradient-to-r from-purple-600 to-violet-600 text-white font-semibold rounded-xl transition-smooth hover:shadow-lg hover:shadow-purple-500/50 active:scale-95;
 }
 
 .btn-secondary {
-  @apply px-6 py-3 glass text-white font-semibold rounded-xl transition-smooth hover:bg-glass hover:border-emerald-400/50 active:scale-95;
+  @apply px-6 py-3 glass text-white font-semibold rounded-xl transition-smooth hover:bg-glass hover:border-purple-400/50 active:scale-95;
 }
 
 /* Input styles */
 .input-field {
-  @apply w-full px-4 py-3 glass text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-smooth;
+  @apply w-full px-4 py-3 glass text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-smooth;
 }
 
 /* Cards */
 .card {
-  @apply glass p-6 transition-smooth hover:shadow-lg hover:shadow-emerald-500/10;
+  @apply glass p-6 transition-smooth hover:shadow-lg hover:shadow-purple-500/10;
 }
 
 .card-hover {
-  @apply card hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-500/20;
+  @apply card hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/20;
 }
 
 /* Text */
 .text-gradient {
-  @apply bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-purple-400 via-violet-400 to-purple-300 bg-clip-text text-transparent;
 }
 
 /* Overlay */
