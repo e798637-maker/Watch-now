@@ -18,7 +18,7 @@ const Navigation: React.FC = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-cyan-400 rounded-lg flex items-center justify-center group-hover:shadow-lg group-hover:shadow-emerald-500/50 transition-smooth">
+          <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-violet-400 rounded-lg flex items-center justify-center group-hover:shadow-lg group-hover:shadow-purple-500/50 transition-smooth">
             <Film size={24} className="text-dark-900" />
           </div>
           <span className="text-xl font-bold gradient-text hidden sm:inline">MovieVault</span>
@@ -28,14 +28,14 @@ const Navigation: React.FC = () => {
         <div className="hidden md:flex items-center gap-8">
           <Link
             to="/"
-            className="text-gray-300 hover:text-emerald-400 transition-smooth flex items-center gap-2"
+            className="text-gray-300 hover:text-purple-400 transition-smooth flex items-center gap-2"
           >
             <LayoutGrid size={20} />
             مكتبتي
           </Link>
           <Link
             to="/admin"
-            className="text-gray-300 hover:text-emerald-400 transition-smooth"
+            className="text-gray-300 hover:text-purple-400 transition-smooth"
           >
             إضافة عمل
           </Link>
@@ -44,7 +44,7 @@ const Navigation: React.FC = () => {
             <img
               src={currentProfile?.avatar}
               alt="Profile"
-              className="w-8 h-8 rounded-full border border-emerald-400/30"
+              className="w-8 h-8 rounded-full border border-purple-400/30"
             />
           </div>
           <Link to="/settings" className="p-2 hover:bg-white/10 rounded-lg transition-smooth">
@@ -67,13 +67,13 @@ const Navigation: React.FC = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden mt-4 space-y-4 pb-4">
-          <Link to="/" className="block text-gray-300 hover:text-emerald-400">
+          <Link to="/" className="block text-gray-300 hover:text-purple-400">
             مكتبتي
           </Link>
-          <Link to="/admin" className="block text-gray-300 hover:text-emerald-400">
+          <Link to="/admin" className="block text-gray-300 hover:text-purple-400">
             إضافة عمل
           </Link>
-          <Link to="/settings" className="block text-gray-300 hover:text-emerald-400">
+          <Link to="/settings" className="block text-gray-300 hover:text-purple-400">
             الإعدادات
           </Link>
           <button
