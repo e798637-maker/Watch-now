@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { runMigrations } from "./db/migrate";
 
 import authRoutes from "./routes/auth";
 import profileRoutes from "./routes/profiles";
@@ -32,7 +33,17 @@ app.use(cors({
   credentials: true,
 }));
 
-// Neon HTTP driver — no connection setup needed
+// Run DB migrations once per cold start
+app.use(async (_req: Request, res: Response, next: NextFunction) => {
+  try {
+    await runMigrations();
+    next();
+  } catch (e) {
+    console.error("Migration failed:", e);
+    res.status(503).json({ error: "Database setup failed, please retry" });
+  }
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/profiles", profileRoutes);
 app.use("/api/works", workRoutes);
