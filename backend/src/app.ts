@@ -14,17 +14,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
-
-app.use(cors({
-  origin: (origin, cb) => {
-    if (!origin) return cb(null, true);
-    if (/\.vercel\.app$/.test(new URL(origin).hostname)) return cb(null, true);
-    const allowed = [process.env.FRONTEND_URL, "http://localhost:5173"].filter(Boolean);
-    if (allowed.includes(origin)) return cb(null, true);
-    cb(null, true); // allow all for now
-  },
-  credentials: true,
-}));
+app.use(cors({ origin: true, credentials: true }));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/profiles", profileRoutes);
@@ -39,8 +29,8 @@ app.get("/api/health", (_req: Request, res: Response) => res.json({ status: "ok"
 
 app.use((_req: Request, res: Response) => res.status(404).json({ error: "Route not found" }));
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-  console.error("Error:", err);
-  res.status(500).json({ error: "Internal server error" });
+  console.error(err);
+  res.status(500).json({ error: err.message || "Internal server error" });
 });
 
 if (process.env.VERCEL !== "1") {
