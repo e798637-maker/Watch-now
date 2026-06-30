@@ -50,7 +50,7 @@ const ProfileSettings: React.FC = () => {
                 <img
                   src={avatar}
                   alt="Profile"
-                  className="w-24 h-24 rounded-full border-2 border-emerald-400/30 object-cover"
+                  className="w-24 h-24 rounded-full border-2 border-purple-400/30 object-cover"
                 />
                 <div className="flex-1">
                   <input
@@ -82,7 +82,7 @@ const ProfileSettings: React.FC = () => {
               <div
                 className={`p-4 rounded-lg ${
                   message.includes('بنجاح')
-                    ? 'bg-emerald-500/20 border border-emerald-500/50 text-emerald-200'
+                    ? 'bg-purple-500/20 border border-purple-500/50 text-purple-200'
                     : 'bg-red-500/20 border border-red-500/50 text-red-200'
                 }`}
               >
@@ -112,18 +112,18 @@ const ProfileSettings: React.FC = () => {
                   key={profile.id}
                   className={`p-4 rounded-xl text-center cursor-pointer transition-smooth ${
                     profile.id === currentProfile?.id
-                      ? 'glass border-emerald-400'
-                      : 'card hover:border-emerald-400/50'
+                      ? 'glass border-purple-400'
+                      : 'card hover:border-purple-400/50'
                   }`}
                 >
                   <img
                     src={profile.avatar}
                     alt={profile.name}
-                    className="w-12 h-12 rounded-full mx-auto mb-2 border border-emerald-400/30"
+                    className="w-12 h-12 rounded-full mx-auto mb-2 border border-purple-400/30"
                   />
                   <p className="text-sm font-medium text-white">{profile.name}</p>
                   {profile.id === currentProfile?.id && (
-                    <p className="text-xs text-emerald-400 mt-1">الحالي</p>
+                    <p className="text-xs text-purple-400 mt-1">الحالي</p>
                   )}
                 </div>
               ))}
