@@ -1,89 +1,45 @@
-import express, { Response } from 'express';
-import { AuthRequest, authMiddleware } from '../middleware/auth';
-import { Profile } from '../models/Profile';
-import jwt from 'jsonwebtoken';
+import express, { Response } from "express";
+import jwt from "jsonwebtoken";
+import { AuthRequest, authMiddleware } from "../middleware/auth";
+import { db } from "../db";
+import { profiles } from "../db/schema";
+import { eq } from "drizzle-orm";
 
 const router = express.Router();
 
-// Get all profiles for current user
-router.get('/', authMiddleware, async (req: AuthRequest, res: Response) => {
+router.get("/", authMiddleware, async (req: AuthRequest, res: Response) => {
   try {
-    const profiles = await Profile.find({ userId: req.userId });
-    res.json(profiles);
-  } catch (error) {
-    console.error('Get profiles error:', error);
-    res.status(500).json({ error: 'Failed to fetch profiles' });
-  }
+    const rows = await db.select().from(profiles).where(eq(profiles.userId, req.userId!));
+    res.json(rows);
+  } catch (e) { res.status(500).json({ error: "Failed to fetch profiles" }); }
 });
 
-// Get single profile
-router.get('/:id', authMiddleware, async (req: AuthRequest, res: Response) => {
+router.get("/:id", authMiddleware, async (req: AuthRequest, res: Response) => {
   try {
-    const profile = await Profile.findById(req.params.id);
-
-    if (!profile) {
-      return res.status(404).json({ error: 'Profile not found' });
-    }
-
-    res.json(profile);
-  } catch (error) {
-    console.error('Get profile error:', error);
-    res.status(500).json({ error: 'Failed to fetch profile' });
-  }
+    const [p] = await db.select().from(profiles).where(eq(profiles.id, Number(req.params.id)));
+    if (!p) return res.status(404).json({ error: "Profile not found" });
+    res.json(p);
+  } catch (e) { res.status(500).json({ error: "Failed to fetch profile" }); }
 });
 
-// Update profile
-router.put('/:id', authMiddleware, async (req: AuthRequest, res: Response) => {
+router.put("/:id", authMiddleware, async (req: AuthRequest, res: Response) => {
   try {
     const { name, avatar } = req.body;
-
-    const profile = await Profile.findByIdAndUpdate(
-      req.params.id,
-      { name, avatar },
-      { new: true }
-    );
-
-    if (!profile) {
-      return res.status(404).json({ error: 'Profile not found' });
-    }
-
-    res.json(profile);
-  } catch (error) {
-    console.error('Update profile error:', error);
-    res.status(500).json({ error: 'Failed to update profile' });
-  }
+    const [p] = await db.update(profiles).set({ name, avatar }).where(eq(profiles.id, Number(req.params.id))).returning();
+    if (!p) return res.status(404).json({ error: "Profile not found" });
+    res.json(p);
+  } catch (e) { res.status(500).json({ error: "Failed to update profile" }); }
 });
 
-// Switch profile (update token)
-router.post('/switch/:id', async (req: AuthRequest, res: Response) => {
+router.post("/switch/:id", async (req: AuthRequest, res: Response) => {
   try {
     const { userId } = req.body;
-
-    const profile = await Profile.findById(req.params.id);
-
-    if (!profile) {
-      return res.status(404).json({ error: 'Profile not found' });
-    }
-
-    if (profile.userId.toString() !== userId) {
-      return res.status(403).json({ error: 'Unauthorized' });
-    }
-
-    // Generate new token with switched profile
-    const token = jwt.sign(
-      {
-        userId,
-        profileId: profile._id,
-      },
-      process.env.JWT_SECRET || 'secret',
-      { expiresIn: '7d' }
-    );
-
+    const [p] = await db.select().from(profiles).where(eq(profiles.id, Number(req.params.id)));
+    if (!p) return res.status(404).json({ error: "Profile not found" });
+    if (p.userId !== Number(userId)) return res.status(403).json({ error: "Unauthorized" });
+    const token = jwt.sign({ userId: p.userId, profileId: p.id }, process.env.JWT_SECRET || "secret", { expiresIn: "7d" });
     res.json({ token });
-  } catch (error) {
-    console.error('Switch profile error:', error);
-    res.status(500).json({ error: 'Failed to switch profile' });
-  }
+  } catch (e) { res.status(500).json({ error: "Failed to switch profile" }); }
 });
 
 export default router;
