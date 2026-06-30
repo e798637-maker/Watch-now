@@ -1,25 +1,37 @@
 import mongoose from 'mongoose';
 
-export const connectDB = async () => {
-  try {
-    const mongoUri = process.env.MONGODB_URI;
-    if (!mongoUri) {
-      throw new Error('MONGODB_URI is not defined');
-    }
+let isConnected = false;
 
-    await mongoose.connect(mongoUri);
-    console.log('✅ MongoDB connected successfully');
+export const connectDB = async () => {
+  if (isConnected && mongoose.connection.readyState === 1) {
+    return;
+  }
+
+  const mongoUri = process.env.MONGODB_URI;
+  if (!mongoUri) {
+    throw new Error('MONGODB_URI is not defined');
+  }
+
+  try {
+    const conn = await mongoose.connect(mongoUri, {
+      bufferCommands: false,
+      serverSelectionTimeoutMS: 10000,
+    });
+    isConnected = conn.connections[0].readyState === 1;
+    console.log('\u2705 MongoDB connected successfully');
   } catch (error) {
-    console.error('❌ MongoDB connection failed:', error);
-    process.exit(1);
+    isConnected = false;
+    console.error('\u274c MongoDB connection failed:', error);
+    throw error;
   }
 };
 
 export const disconnectDB = async () => {
   try {
     await mongoose.disconnect();
-    console.log('✅ MongoDB disconnected');
+    isConnected = false;
+    console.log('\u2705 MongoDB disconnected');
   } catch (error) {
-    console.error('❌ MongoDB disconnect failed:', error);
+    console.error('\u274c MongoDB disconnect failed:', error);
   }
 };
