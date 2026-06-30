@@ -68,7 +68,7 @@ const Dashboard: React.FC = () => {
         {/* Search and Filter */}
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <div className="flex-1 relative">
-            <Search size={20} className="absolute left-3 top-3 text-emerald-400" />
+            <Search size={20} className="absolute left-3 top-3 text-purple-400" />
             <input
               type="text"
               placeholder="ابحث عن فيلم أو مسلسل..."
@@ -96,7 +96,7 @@ const Dashboard: React.FC = () => {
         {loading ? (
           <div className="flex items-center justify-center py-20">
             <div className="text-center">
-              <div className="w-12 h-12 border-4 border-emerald-400/20 border-t-emerald-400 rounded-full animate-spin mx-auto mb-4"></div>
+              <div className="w-12 h-12 border-4 border-purple-400/20 border-t-purple-400 rounded-full animate-spin mx-auto mb-4"></div>
               <p className="text-gray-400">جاري تحميل الأعمال...</p>
             </div>
           </div>
@@ -122,7 +122,7 @@ const Dashboard: React.FC = () => {
                     className="w-full h-full object-cover group-hover:scale-110 transition-smooth"
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-smooth flex items-center justify-center">
-                    <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center">
+                    <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
                       <svg
                         className="w-6 h-6 text-white ml-1"
                         fill="currentColor"
@@ -135,7 +135,7 @@ const Dashboard: React.FC = () => {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-white group-hover:text-emerald-400 transition-smooth line-clamp-2">
+                  <h3 className="font-semibold text-white group-hover:text-purple-400 transition-smooth line-clamp-2">
                     {work.title}
                   </h3>
                   <div className="flex items-center justify-between mt-2 text-sm text-gray-400">
