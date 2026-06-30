@@ -33,9 +33,9 @@ const ProfileSelect: React.FC = () => {
               <img
                 src={profile.avatar}
                 alt={profile.name}
-                className="w-24 h-24 rounded-full mb-4 border-2 border-emerald-400/30 group-hover:border-emerald-400 transition-smooth"
+                className="w-24 h-24 rounded-full mb-4 border-2 border-purple-400/30 group-hover:border-purple-400 transition-smooth"
               />
-              <h3 className="text-xl font-semibold text-white group-hover:text-emerald-400 transition-smooth">
+              <h3 className="text-xl font-semibold text-white group-hover:text-purple-400 transition-smooth">
                 {profile.name}
               </h3>
               <p className="text-xs text-gray-400 mt-2">اضغط للدخول</p>
