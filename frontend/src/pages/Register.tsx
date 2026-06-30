@@ -39,7 +39,7 @@ const Register: React.FC = () => {
       <div className="w-full max-w-md animate-slide-in">
         {/* Logo */}
         <div className="flex justify-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-cyan-400 rounded-2xl flex items-center justify-center shadow-2xl shadow-emerald-500/30">
+          <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-violet-400 rounded-2xl flex items-center justify-center shadow-2xl shadow-purple-500/30">
             <Film size={32} className="text-dark-900" />
           </div>
         </div>
@@ -57,7 +57,7 @@ const Register: React.FC = () => {
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">اسم المستخدم</label>
               <div className="relative">
-                <User size={18} className="absolute left-3 top-3 text-emerald-400" />
+                <User size={18} className="absolute left-3 top-3 text-purple-400" />
                 <input
                   type="text"
                   value={username}
@@ -73,7 +73,7 @@ const Register: React.FC = () => {
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">البريد الإلكتروني</label>
               <div className="relative">
-                <Mail size={18} className="absolute left-3 top-3 text-emerald-400" />
+                <Mail size={18} className="absolute left-3 top-3 text-purple-400" />
                 <input
                   type="email"
                   value={email}
@@ -89,7 +89,7 @@ const Register: React.FC = () => {
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">كلمة المرور</label>
               <div className="relative">
-                <Lock size={18} className="absolute left-3 top-3 text-emerald-400" />
+                <Lock size={18} className="absolute left-3 top-3 text-purple-400" />
                 <input
                   type="password"
                   value={password}
@@ -105,7 +105,7 @@ const Register: React.FC = () => {
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">تأكيد كلمة المرور</label>
               <div className="relative">
-                <Lock size={18} className="absolute left-3 top-3 text-emerald-400" />
+                <Lock size={18} className="absolute left-3 top-3 text-purple-400" />
                 <input
                   type="password"
                   value={confirmPassword}
@@ -139,7 +139,7 @@ const Register: React.FC = () => {
         <div className="text-center">
           <p className="text-gray-400">
             هل لديك حساب بالفعل؟{' '}
-            <Link to="/login" className="text-emerald-400 hover:text-emerald-300 font-semibold">
+            <Link to="/login" className="text-purple-400 hover:text-purple-300 font-semibold">
               تسجيل دخول
             </Link>
           </p>
