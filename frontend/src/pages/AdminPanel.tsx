@@ -343,7 +343,7 @@ const AdminPanel: React.FC = () => {
               <div
                 className={`p-4 rounded-lg ${
                   message.includes('بنجاح')
-                    ? 'bg-emerald-500/20 border border-emerald-500/50 text-emerald-200'
+                    ? 'bg-purple-500/20 border border-purple-500/50 text-purple-200'
                     : 'bg-red-500/20 border border-red-500/50 text-red-200'
                 }`}
               >
