@@ -7,6 +7,7 @@ import apiClient from '../api/client';
 interface Work {
   _id: string;
   title: string;
+  type?: string;
   description: string;
   poster: string;
   videoUrl: string;
