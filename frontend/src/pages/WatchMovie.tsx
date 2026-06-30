@@ -123,7 +123,7 @@ const WatchMovie: React.FC = () => {
     return (
       <div className="min-h-screen bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-emerald-400/20 border-t-emerald-400 rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-12 h-12 border-4 border-purple-400/20 border-t-purple-400 rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-400">جاري تحميل الفيلم...</p>
         </div>
       </div>
@@ -146,7 +146,7 @@ const WatchMovie: React.FC = () => {
         {/* Back Button */}
         <button
           onClick={() => navigate('/')}
-          className="flex items-center gap-2 text-gray-400 hover:text-emerald-400 transition-smooth mb-6"
+          className="flex items-center gap-2 text-gray-400 hover:text-purple-400 transition-smooth mb-6"
         >
           <ArrowLeft size={20} />
           العودة
@@ -201,7 +201,7 @@ const WatchMovie: React.FC = () => {
                 {work.genre.map((g) => (
                   <span
                     key={g}
-                    className="px-3 py-1 glass text-xs rounded-full text-emerald-400"
+                    className="px-3 py-1 glass text-xs rounded-full text-purple-400"
                   >
                     {g}
                   </span>
@@ -237,7 +237,7 @@ const WatchMovie: React.FC = () => {
               onClick={handleToggleFavorite}
               className={`w-full py-3 glass rounded-xl font-semibold transition-smooth flex items-center justify-center gap-2 ${
                 isFavorite
-                  ? 'bg-emerald-500/20 border-emerald-400'
+                  ? 'bg-purple-500/20 border-purple-400'
                   : ''
               }`}
             >
@@ -249,7 +249,7 @@ const WatchMovie: React.FC = () => {
               onClick={handleToggleWatchlist}
               className={`w-full py-3 glass rounded-xl font-semibold transition-smooth flex items-center justify-center gap-2 ${
                 isInWatchlist
-                  ? 'bg-cyan-500/20 border-cyan-400'
+                  ? 'bg-violet-500/20 border-violet-400'
                   : ''
               }`}
             >
