@@ -4,23 +4,33 @@ let migrated = false;
 
 export async function runMigrations() {
   if (migrated) return;
-  const sql = neon(process.env.DATABASE_URL!);
 
-  await sql(`
+  const url = process.env.DATABASE_URL;
+  if (!url) throw new Error("DATABASE_URL is not set");
+
+  const sql = neon(url);
+
+  await sql`
     CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
       email TEXT NOT NULL UNIQUE,
       password TEXT NOT NULL,
       username TEXT NOT NULL UNIQUE,
       created_at TIMESTAMP DEFAULT NOW()
-    );
+    )
+  `;
+
+  await sql`
     CREATE TABLE IF NOT EXISTS profiles (
       id SERIAL PRIMARY KEY,
       user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
       name TEXT NOT NULL,
       avatar TEXT DEFAULT 'https://via.placeholder.com/150?text=Profile',
       created_at TIMESTAMP DEFAULT NOW()
-    );
+    )
+  `;
+
+  await sql`
     CREATE TABLE IF NOT EXISTS works (
       id SERIAL PRIMARY KEY,
       title TEXT NOT NULL,
@@ -39,21 +49,30 @@ export async function runMigrations() {
       rating REAL DEFAULT 0,
       created_at TIMESTAMP DEFAULT NOW(),
       updated_at TIMESTAMP DEFAULT NOW()
-    );
+    )
+  `;
+
+  await sql`
     CREATE TABLE IF NOT EXISTS favorites (
       id SERIAL PRIMARY KEY,
       profile_id INTEGER NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
       work_id INTEGER NOT NULL REFERENCES works(id) ON DELETE CASCADE,
       created_at TIMESTAMP DEFAULT NOW(),
       CONSTRAINT favorites_profile_work_uniq UNIQUE(profile_id, work_id)
-    );
+    )
+  `;
+
+  await sql`
     CREATE TABLE IF NOT EXISTS watchlist (
       id SERIAL PRIMARY KEY,
       profile_id INTEGER NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
       work_id INTEGER NOT NULL REFERENCES works(id) ON DELETE CASCADE,
       created_at TIMESTAMP DEFAULT NOW(),
       CONSTRAINT watchlist_profile_work_uniq UNIQUE(profile_id, work_id)
-    );
+    )
+  `;
+
+  await sql`
     CREATE TABLE IF NOT EXISTS ratings (
       id SERIAL PRIMARY KEY,
       profile_id INTEGER NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
@@ -63,7 +82,10 @@ export async function runMigrations() {
       created_at TIMESTAMP DEFAULT NOW(),
       updated_at TIMESTAMP DEFAULT NOW(),
       CONSTRAINT ratings_profile_work_uniq UNIQUE(profile_id, work_id)
-    );
+    )
+  `;
+
+  await sql`
     CREATE TABLE IF NOT EXISTS user_progress (
       id SERIAL PRIMARY KEY,
       profile_id INTEGER NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
@@ -73,8 +95,8 @@ export async function runMigrations() {
       is_completed BOOLEAN DEFAULT FALSE,
       last_watched_at TIMESTAMP DEFAULT NOW(),
       CONSTRAINT progress_profile_work_uniq UNIQUE(profile_id, work_id)
-    );
-  `);
+    )
+  `;
 
   migrated = true;
   console.log("✅ DB migrations applied");
